@@ -1,0 +1,26 @@
+# Node modules
+/node_modules/
+
+# Arquivos de configuração de ambiente
+.env
+.env.dev
+.env.prod
+.env.local
+
+# Arquivos de log
+*.log
+
+# Pasta do Docker
+docker-compose.override.yml
+
+# Arquivos de build (caso tenha build ou dist, por exemplo)
+dist/
+build/
+
+# Arquivos de IDE (caso use alguma IDE como VS Code)
+.vscode/
+.idea/
+
+# Outros arquivos temporários
+*.swp
+.DS_Store

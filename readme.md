@@ -1,5 +1,5 @@
 # Projeto de teste para Docker na VPS
-<code>
+
 <pre>
 #Script de Banco de dados: Postgres para uso de exemplo
 CREATE TABLE filmes (
@@ -61,7 +61,6 @@ INSERT INTO musica (titulo, artista, ano_lancamento, genero, duracao, album, des
 <pre>
 SELECT \* FROM series WHERE titulo = 'Breaking Bad';
 </pre>
-</code>
 
 # Os arquivos .env devem ser criado.
 #exemplo de variaveis de ambiente
@@ -83,10 +82,7 @@ PGDATABASE=postgres
 </pre>
 
 # Comando yarn install
-<code>
-yarn install
-</code>
-
+<code>yarn install</code>
 ### Desenvolvimento
 <code>yarn dev</code>
 ### Produção
@@ -98,7 +94,7 @@ yarn install
 ### Produção
 <code>docker compose up --build</code>
 
-#📁 Estrutura do Projeto
+# 📁 Estrutura do Projeto
 <pre>
 projeto/
 ├── .env # Variáveis de ambiente produção

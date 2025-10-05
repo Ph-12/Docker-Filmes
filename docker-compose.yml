@@ -3,11 +3,15 @@ services:
     build: .
     container_name: api-filmes
     environment:
-      PGHOST: ${PGHOST}  # O IP ou nome do serviço no Docker
-      PGPORT: ${PGPORT}
-      PGUSER: ${PGUSER}
-      PGPASSWORD: ${PGPASSWORD}
-      PGDATABASE: ${PGDATABASE}
+      PGHOST: host.docker.internal
+      PGPORT: "${PGPORT}"
+      PGUSER: "${PGUSER}"
+      PGPASSWORD: "${PGPASSWORD}"
+      PGDATABASE: "${PGDATABASE}"
+    ports:
+      - "3000:3000"
     volumes:
       - .:/usr/src/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped

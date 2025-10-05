@@ -15,15 +15,22 @@ const pool = new Pool({
         user: process.env.PGUSER,
         password: process.env.PGPASSWORD,
         database: process.env.PGDATABASE,
+        connectionTimeoutMillis: 2000,
+        idleTimeoutMillis: 10000
 });
 
 
-app.get('/health', async (_req, res) => {
+app.get('/health', (_req, res) => {
+        res.json({ ok: true, uptime: process.uptime() });
+});
+
+// DB health (verifica conexão)
+app.get('/dbhealth', async (_req, res) => {
         try {
                 await pool.query('SELECT 1');
-                res.json({ ok: true });
+                res.json({ db: true });
         } catch (e) {
-                res.status(500).json({ ok: false, error: e.message });
+                res.status(500).json({ db: false, error: e.message });
         }
 });
 
@@ -37,4 +44,4 @@ app.get('/filmes', async (_req, res) => {
         }
 });
 
-app.listen(port, () => console.log(`API na porta ${port}`));
+app.listen(port, '0.0.0.0', () => console.log(`API na porta ${port}`));

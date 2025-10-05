@@ -8,8 +8,6 @@ services:
       PGUSER: ${PGUSER}
       PGPASSWORD: ${PGPASSWORD}
       PGDATABASE: ${PGDATABASE}
-    ports:
-      - "3000:3000"
     volumes:
       - .:/usr/src/app
     restart: unless-stopped

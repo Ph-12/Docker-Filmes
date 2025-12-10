@@ -1,12 +1,21 @@
-require('dotenv').config();  // Carrega as variáveis de ambiente
+// Carrega variáveis de ambiente APENAS se não estiver em produção.
+// Em produção (NODE_ENV=production), assumimos que as variáveis já
+// vêm do ambiente (PM2, Docker, etc.).
+if (process.env.NODE_ENV !== 'production') {
+        const path = process.env.DOTENV_CONFIG_PATH || '.env';
+        console.log(`Carregando variáveis de ambiente do arquivo: ${path}`);
+        require('dotenv').config({ path });
+}
+
 const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-console.log("PGHOST:", process.env.PGHOST);
-console.log("PGPORT:", process.env.PGPORT);
+// Logs úteis para debug (não mostra senha)
+console.log('PGHOST:', process.env.PGHOST);
+console.log('PGPORT:', process.env.PGPORT);
 
 // Configuração da conexão ao banco de dados
 const pool = new Pool({
@@ -16,15 +25,15 @@ const pool = new Pool({
         password: process.env.PGPASSWORD,
         database: process.env.PGDATABASE,
         connectionTimeoutMillis: 2000,
-        idleTimeoutMillis: 10000
+        idleTimeoutMillis: 10000,
 });
 
-
+// Healthcheck da API
 app.get('/health', (_req, res) => {
         res.json({ ok: true, uptime: process.uptime() });
 });
 
-// DB health (verifica conexão)
+// Healthcheck do banco
 app.get('/dbhealth', async (_req, res) => {
         try {
                 await pool.query('SELECT 1');
@@ -34,6 +43,7 @@ app.get('/dbhealth', async (_req, res) => {
         }
 });
 
+// Endpoint de exemplo
 app.get('/filmes', async (_req, res) => {
         try {
                 const r = await pool.query('SELECT * FROM filmes ORDER BY id');

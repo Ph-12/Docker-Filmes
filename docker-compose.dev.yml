@@ -1,12 +1,13 @@
 services:
   api:
     build: .
-    container_name: api-filmes
-    network_mode: host
+    container_name: api-filmes-dev
     working_dir: /usr/src/app
     env_file:
-      - .env
-    command: ["npm", "start"] 
+      - .env.dev
+    ports:
+      - "3000:3000"
+    command: ["npm", "run", "dev"]
     volumes:
       - .:/usr/src/app
     restart: unless-stopped

@@ -11,7 +11,7 @@ const express = require('express');
 const { Pool } = require('pg');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Logs úteis para debug (não mostra senha)
 console.log('PGHOST:', process.env.PGHOST);

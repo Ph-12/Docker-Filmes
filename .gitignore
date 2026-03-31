@@ -6,6 +6,7 @@
 .env.dev
 .env.prod
 .env.local
+*.sh
 
 # Arquivos de log
 *.log
@@ -28,3 +29,4 @@ build/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
